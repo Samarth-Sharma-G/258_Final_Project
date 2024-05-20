@@ -32,5 +32,41 @@ Thus, moving to a binary classification problem.
 
 ## Modeling
 
+Evaluation Metric: Accuracy (As we converted the problem to a binary classification problem with balanced classes, for simplicity sake we've choosen accuracy as our evaluation metric.)
+
+Scenarios in which Precision/Recall would be preferred:
+- Recall: In case it's fine to falsly flag wafer chips and there is another layer of check where the good ones wil be retrived (or it's fine to compromise some good ones for quality assurance).
+- Precision: In case the chips are really expensive and this is the last layer of check, so we can't afford to falsly flag a chip defective and just discard it (less likely).
+
+Baseline model was a good starting point. The model architecture was built by ChatGPT. Below is the performance:
+
+![image](https://github.com/Samarth-Sharma-G/258_Final_Project/assets/107587243/b924007f-9d94-44b9-87cb-c3914273fa1f)
+
+Observation:
+- The model is overfitting the training data
+
+Improvements to be incorporated:
+- Regularization
+- Improving model Architecture
+- Increase the Data (recommended but not possible in this case)
+
+Best Model's Performance after incorporating the changes:
+
+![image](https://github.com/Samarth-Sharma-G/258_Final_Project/assets/107587243/aa427390-3989-4a64-8b10-4e281b9afc67)
+
+Specific Changes:
+- Using different regularization techniques such as Batch Normalization and Dropout layer
+- Reducing the model complexity - specially after flattening the input
+- Using newer more adaptive optimizer AdamW
+
+Observation:
+
+Our objective for model development phase was to create a model with 90+ performance (accuracy here), so we stop even though if we trained the model for more epoch the performance would have improved as the loss is still going down. 
+
+Baseline vs Best Model Architectures:
+
+![Baseline Model Architecture (1)](https://github.com/Samarth-Sharma-G/258_Final_Project/assets/107587243/1163b71e-ded1-45ac-bc7d-1f70fbd0976d)
+
+## MLOps
 
 
