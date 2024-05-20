@@ -33,7 +33,8 @@ def get_prediction(image_array, url, api_key):
         response = urllib.request.urlopen(req)
         result = response.read()
         ans = json.loads(result.decode('utf-8'))
-        predicted_class = np.argmax(np.array(ans), axis=1)[0]
+        predicted_class = np.array(ans)[0]
+        print(predicted_class)
         if predicted_class <0.5:
             ans = 'Normal'
         else:
