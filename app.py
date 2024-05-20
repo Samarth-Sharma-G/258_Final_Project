@@ -26,7 +26,7 @@ def get_prediction(image_array, url, api_key):
     headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + api_key,
-        'azureml-model-deployment': 'iris-model-4'
+        'azureml-model-deployment': 'waffer-defect-1'
     }
     req = urllib.request.Request(url, body, headers)
     try:
@@ -34,8 +34,11 @@ def get_prediction(image_array, url, api_key):
         result = response.read()
         ans = json.loads(result.decode('utf-8'))
         predicted_class = np.argmax(np.array(ans), axis=1)[0]
-        mapping_type = {0: 'Center', 1: 'Donut', 2: 'Edge-Loc', 3: 'Edge-Ring', 4: 'Loc', 5: 'Random', 6: 'Scratch', 7: 'Near-full', 8: 'none'}
-        return mapping_type[predicted_class]
+        if predicted_class <0.5:
+            ans = 'Normal'
+        else:
+            ans = 'Defect Detected'
+        return ans
     except urllib.error.HTTPError as error:
         print("The request failed with status code: " + str(error.code))
         print(error.info())
@@ -56,6 +59,7 @@ def predict():
     if file:
         img = Image.open(file.stream)
         img_array = np.array(img)
+        img_array = img_array.reshape(26,26,1)
         # Constants
         URL = 'https://team-pi-vtzdu.westus2.inference.ml.azure.com/score'
         with open('secrets.json') as f:
