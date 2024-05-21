@@ -69,4 +69,46 @@ Baseline vs Best Model Architectures:
 
 ## MLOps
 
+For the MLops, we're assuming that the data cleaing pipline is different, which will channel data to the data store. Thus, alwalys only the clean and updated data will be there in the data store.
 
+![image](https://github.com/Samarth-Sharma-G/258_Final_Project/assets/107587243/2cc6b1e7-88f6-4b48-a4bf-67caff2fad3c)
+
+This pipeline can be scheduled to run on regular intervals , or run when new data arrives. It can configure directly as a pipeline on Azure ML.
+
+An experiment is nothing but a collection of different models you built when trying to find the best one:
+
+![image](https://github.com/Samarth-Sharma-G/258_Final_Project/assets/107587243/3bd47fc6-a073-45bc-9a11-528947871c53)
+
+With each experiment, we have the list of all the models trained for it, we use MLFlow for logging models performance and its artifacts
+
+![image](https://github.com/Samarth-Sharma-G/258_Final_Project/assets/107587243/553fdd6b-b746-4ca6-be64-5e746639569d)
+
+For each logged model we have all the logged artifacts and metrics, along with the hyperparameter used for training it
+
+![image](https://github.com/Samarth-Sharma-G/258_Final_Project/assets/107587243/badc01f9-f450-475d-a269-bddfa6e25867)
+
+Model Registry is a means through which we can apply a version control on our models, it could be as simple as same model trained on data at 2 different times
+
+![image](https://github.com/Samarth-Sharma-G/258_Final_Project/assets/107587243/d67576b5-92a8-42e5-9081-1bee41d0594e)
+
+Endpoint Deployment allows us to expose our model as an API to the rest of the world.
+
+![image](https://github.com/Samarth-Sharma-G/258_Final_Project/assets/107587243/4b0567f5-778f-4a81-90c6-d71f4a6660d0)
+
+What we do is perform an experiment whenever new data comes in or as per the schedule, and it trains 3 models. The best performing model aka the champion model is registerd to the model registry. Then getting the model in the registry we perform A/B testing. Then finally the model is ready for deployement, but if there is already one model deployed, then the deployed model and the challenger model (the champion model from the experiment) are evaluated on the new data and if the challenger wins, it os deployed or the model already in production continues to serve.
+
+## Inference Pipeline
+
+![image](https://github.com/Samarth-Sharma-G/258_Final_Project/assets/107587243/addaed97-5f6b-456d-81f4-24fce42f2862)
+
+As Endpoint and model are different, even if we deploy a different model the end point url remains the same so no changes there.
+
+UI is fairly simple, you can upload an image from your device 
+
+![image](https://github.com/Samarth-Sharma-G/258_Final_Project/assets/107587243/cfb56dd6-8999-4d2d-a4b1-71c980725a4c)
+
+And a prediction will be returned:
+
+![image](https://github.com/Samarth-Sharma-G/258_Final_Project/assets/107587243/abd6a07c-b2a1-4d11-af3e-b1271fa387b5)
+
+![image](https://github.com/Samarth-Sharma-G/258_Final_Project/assets/107587243/eb78b458-310a-439a-b0bd-3e0deaf60a21)
