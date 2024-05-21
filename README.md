@@ -1,4 +1,8 @@
-# Wafer Defect Detection and MLOps
+[Project Report Link](https://docs.google.com/document/d/11hbjZfpXR2C6PgKxpLrhuE5oDf72uBq2FPDUJGOtfrU/edit?usp=sharing)
+
+[Presentation Slide deck](https://docs.google.com/presentation/d/17taN_pZp_4o1ZOrtxuZ7G69Y7ex3MhhvP2R-f0azNMU/edit?usp=sharing)
+
+# Detection of Defects in Computer Chips and MLOps
 
 A wafer chip, or semiconductor wafer, is a thin slice of material like silicon used to create integrated circuits and microdevices through processes such as photolithography and doping. Defective wafer chips can lead to degraded product performance, reliability, and safety, and have significant economic, reputational, environmental, and supply chain impacts. Therefore, detecting and addressing defects is essential for maintaining high standards in semiconductor manufacturing and ensuring the quality and reliability of electronic devices.
 
