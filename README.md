@@ -38,9 +38,12 @@ Scenarios in which Precision/Recall would be preferred:
 - Recall: In case it's fine to falsly flag wafer chips and there is another layer of check where the good ones wil be retrived (or it's fine to compromise some good ones for quality assurance).
 - Precision: In case the chips are really expensive and this is the last layer of check, so we can't afford to falsly flag a chip defective and just discard it (less likely).
 
-Baseline model was a good starting point. The model architecture was built by ChatGPT. Below is the performance:
+
+1. For our initial model, we have the basic architecture with an input layer, 3 conv layers, flatten layer, 2 fully connected layers and output layer and the optimizer Adam.   and after training this model, the loss curve we had was
 
 ![image](https://github.com/Samarth-Sharma-G/258_Final_Project/assets/107587243/b924007f-9d94-44b9-87cb-c3914273fa1f)
+
+In this plot, we observe the training and validation loss of our initial model over 10 epochs. The training loss (blue line) decreases steadily, indicating that the model is effectively learning from the training data. The validation loss (orange line) follows a similar trend initially but then diverges after a few epochs. This divergence indicates the overfitting, where the model performs well on the training data but not on the validation data.
 
 Observation:
 - The model is overfitting the training data
@@ -48,16 +51,32 @@ Observation:
 Improvements to be incorporated:
 - Regularization
 - Improving model Architecture
-- Increase the Data (recommended but not possible in this case)
+
+
+Then we thought of adding regularization techniques such as Dropout layers and implementing early stopping to prevent overfitting. At the same time this initial architecture doesn't follow the standard architetcure where a Conv Layer is followed by pooling layer. And then we started experimenting by making changes to the architecture by adding pooling layers and dropout layers.
+
+
+2. After adding these, we observed an improvement where the initial training was slower, but eventually showed better generalization with reduced overfitting compared to the initial model. and also the loss and accuracy showed more consistent improvement.
+
+3. Then we tried changing the optimizer from Adam to Adadelta with a learning rate of 0.01. It struggled with accuracy, and both training and validation loss plateaued early.
+
+
 
 Best Model's Performance after incorporating the changes:
 
-![image](https://github.com/Samarth-Sharma-G/258_Final_Project/assets/107587243/aa427390-3989-4a64-8b10-4e281b9afc67)
+4. Changed the optimizer to AdamW and it has pooling layers, dropout layers and it Demonstrated significant improvement in both training and validation metrics and also Better generalization with consistent improvement in val_loss and val_accuracy.
+
 
 Specific Changes:
 - Using different regularization techniques such as Batch Normalization and Dropout layer
 - Reducing the model complexity - specially after flattening the input
 - Using newer more adaptive optimizer AdamW
+
+![image](https://github.com/Samarth-Sharma-G/258_Final_Project/assets/107587243/aa427390-3989-4a64-8b10-4e281b9afc67)
+
+
+
+In this plot, we observe the training and validation loss of Model 4 over 10 epochs. The training loss (blue line) shows a steady decrease, indicating that the model is effectively learning from the training data. The validation loss (orange line) also decreases significantly, particularly around epoch 3, suggesting that the model is generalizing well to unseen data. The continued decrease of the validation loss towards the later epochs indicates that the model is not overfitting and is performing well on both the training and validation sets. The final low validation loss highlights the model's strong predictive capability for detecting defects in chip images.
 
 Observation:
 
